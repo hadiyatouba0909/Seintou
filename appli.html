@@ -1,6 +1,6 @@
-<!-- /home/ba/Bureau/Seintou/appli.html -->
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,46 +10,49 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f5d0fe, #fecdd3);
             min-height: 100vh;
         }
+
         .tour-item {
             transition: all 0.3s ease;
         }
+
         .tour-item:hover {
             transform: translateY(-5px);
         }
     </style>
 </head>
+
 <body class="flex flex-col items-center justify-center p-4">
     <div class="container max-w-4xl bg-white bg-opacity-90 rounded-3xl shadow-xl p-8 z-10">
         <h1 class="text-4xl font-bold text-center text-purple-600 mb-6">Découvrez CycleHarmony</h1>
-        
-        <p class="text-lg text-center text-gray-700 mb-8">Explorez les fonctionnalités qui vous aideront à mieux comprendre votre cycle</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <p class="text-lg text-center text-gray-700 mb-8">Explorez les fonctionnalités qui vous aideront à mieux
+            comprendre votre cycle</p>
+
+        <div id="cycleTracking" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="tour-item bg-pink-100 p-6 rounded-xl">
                 <i class="fas fa-calendar-alt text-4xl text-pink-500 mb-4"></i>
                 <h2 class="text-xl font-semibold text-pink-700 mb-2">Suivi du Cycle</h2>
                 <p class="text-gray-600">Enregistrez vos règles et symptômes pour prédire vos prochains cycles.</p>
             </div>
-            
-            <div class="tour-item bg-green-100 p-6 rounded-xl">
-                <i class="fas fa-leaf text-4xl text-green-500 mb-4"></i>
-                <h2 class="text-xl font-semibold text-green-700 mb-2">Conseils de Bien-être</h2>
-                <p class="text-gray-600">Obtenez des recommandations personnalisées pour améliorer votre bien-être durant vos cycles.</p>
+
+            <div class="tour-item bg-purple-100 p-6 rounded-xl">
+                <i class="fas fa-chart-line text-4xl text-purple-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-purple-700 mb-2">Analyses et Tendances</h2>
+                <p class="text-gray-600">Visualisez vos données pour mieux comprendre vos schémas menstruels.</p>
             </div>
-            
-            
+
             <div class="tour-item bg-blue-100 p-6 rounded-xl">
                 <i class="fas fa-bell text-4xl text-blue-500 mb-4"></i>
                 <h2 class="text-xl font-semibold text-blue-700 mb-2">Rappels Personnalisés</h2>
                 <p class="text-gray-600">Recevez des notifications pour vos règles, ovulation et prise de pilule.</p>
             </div>
-            
+
             <div class="tour-item bg-green-100 p-6 rounded-xl">
                 <i class="fas fa-book-medical text-4xl text-green-500 mb-4"></i>
                 <h2 class="text-xl font-semibold text-green-700 mb-2">Journal de Santé</h2>
@@ -58,20 +61,19 @@
         </div>
 
         <div class="mt-8 text-center">
-            <button id="startBtn" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-8 rounded-full hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 ease-in-out transform hover:scale-105">
+            <button id="startBtn"
+                class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-8 rounded-full hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 ease-in-out transform hover:scale-105">
                 Commencer à utiliser l'app
             </button>
         </div>
     </div>
 
     <script>
-        gsap.from(".container", {duration: 1, opacity: 0, y: 50, ease: "power3.out"});
-        gsap.from("h1", {duration: 1, opacity: 0, y: 20, delay: 0.5, ease: "power3.out"});
-        gsap.from("p", {duration: 1, opacity: 0, y: 20, delay: 0.7, ease: "power3.out"});
-        gsap.from(".tour-item", {duration: 1, opacity: 0, y: 20, stagger: 0.2, delay: 0.9, ease: "power3.out"});
-        gsap.from("#startBtn", {duration: 1, opacity: 0, y: 20, delay: 1.7, ease: "power3.out"});
-        gsap.from(".tour-item", { duration: 0.5, opacity: 0, y: 50, stagger: 0.2, ease: "power3.out" });
-
+        gsap.from(".container", { duration: 1, opacity: 0, y: 50, ease: "power3.out" });
+        gsap.from("h1", { duration: 1, opacity: 0, y: 20, delay: 0.5, ease: "power3.out" });
+        gsap.from("p", { duration: 1, opacity: 0, y: 20, delay: 0.7, ease: "power3.out" });
+        gsap.from(".tour-item", { duration: 1, opacity: 0, y: 20, stagger: 0.2, delay: 0.9, ease: "power3.out" });
+        gsap.from("#startBtn", { duration: 1, opacity: 0, y: 20, delay: 1.7, ease: "power3.out" });
 
         document.getElementById('startBtn').addEventListener('click', () => {
             alert("Redirection vers l'écran principal de l'application...");
@@ -80,12 +82,18 @@
         // Animation au survol des éléments du tour
         document.querySelectorAll('.tour-item').forEach(item => {
             item.addEventListener('mouseenter', () => {
-                gsap.to(item, {duration: 0.3, y: -5, scale: 1.05, ease: "power2.out"});
+                gsap.to(item, { duration: 0.3, y: -5, scale: 1.05, ease: "power2.out" });
             });
             item.addEventListener('mouseleave', () => {
-                gsap.to(item, {duration: 0.3, y: 0, scale: 1, ease: "power2.out"});
+                gsap.to(item, { duration: 0.3, y: 0, scale: 1, ease: "power2.out" });
             });
+        });
+
+        document.getElementById('cycleTracking').addEventListener('click', () => {
+            // Remplacez l'URL ci-dessous par l'URL de votre page de calendrier
+            window.location.href = 'calendar.html';
         });
     </script>
 </body>
+
 </html>
