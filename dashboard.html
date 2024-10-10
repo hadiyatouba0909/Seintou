@@ -1,11 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard CycleHarmony</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5d0fe, #fecdd3);
+            min-height: 100vh;
+        }
+
+        .dashboard-card {
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
-<body>
-    <h3>nene</h3>
+
+<body class="flex flex-col min-h-screen">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="#" class="flex items-center py-4 px-2">
+                            <span class="font-semibold text-gray-500 text-lg">CycleHarmony</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-purple-500 hover:text-white transition duration-300">Mon Profil</a>
+                    <a href="#" class="py-2 px-2 font-medium text-white bg-purple-500 rounded hover:bg-purple-400 transition duration-300">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-purple-700 mb-6">Bonjour, Sophie !</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">État du cycle</h2>
+                <p class="text-gray-600">Jour 14 de votre cycle</p>
+                <p class="text-sm text-gray-500 mt-2">Prochaines règles dans 14 jours</p>
+            </div>
+
+            <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Humeur</h2>
+                <div class="flex justify-around">
+                    <button class="text-3xl hover:scale-110 transition-transform">😊</button>
+                    <button class="text-3xl hover:scale-110 transition-transform">😐</button>
+                    <button class="text-3xl hover:scale-110 transition-transform">😢</button>
+                    <button class="text-3xl hover:scale-110 transition-transform">😡</button>
+                </div>
+            </div>
+
+            <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Symptômes</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">Crampes</span>
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Fatigue</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">+ Ajouter</span>
+                </div>
+            </div>
+
+            <div class="dashboard-card bg-white p-6 rounded-xl shadow-md col-span-1 md:col-span-2 lg:col-span-3">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Calendrier</h2>
+                <div class="grid grid-cols-7 gap-2 text-center">
+                    <div class="font-bold">Lun</div>
+                    <div class="font-bold">Mar</div>
+                    <div class="font-bold">Mer</div>
+                    <div class="font-bold">Jeu</div>
+                    <div class="font-bold">Ven</div>
+                    <div class="font-bold">Sam</div>
+                    <div class="font-bold">Dim</div>
+                    <!-- Exemple de jours, à remplacer par une génération dynamique -->
+                    <div class="py-2 bg-gray-100 rounded">1</div>
+                    <div class="py-2 bg-gray-100 rounded">2</div>
+                    <div class="py-2 bg-pink-200 rounded">3</div>
+                    <div class="py-2 bg-pink-200 rounded">4</div>
+                    <div class="py-2 bg-gray-100 rounded">5</div>
+                    <div class="py-2 bg-gray-100 rounded">6</div>
+                    <div class="py-2 bg-gray-100 rounded">7</div>
+                    <!-- ... autres jours ... -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white text-center p-4 mt-8">
+        <p class="text-gray-600">© 2024 CycleHarmony. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Animation d'entrée pour les cartes du dashboard
+        gsap.from(".dashboard-card", {
+            duration: 0.8,
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
+        // Exemple de fonction pour enregistrer l'humeur
+        function recordMood(mood) {
+            console.log("Humeur enregistrée :", mood);
+            // Ici, vous pouvez ajouter la logique pour envoyer ces données à votre backend
+        }
+
+        // Ajouter des écouteurs d'événements aux boutons d'humeur
+        document.querySelectorAll('.dashboard-card:nth-child(2) button').forEach(button => {
+            button.addEventListener('click', () => recordMood(button.textContent));
+        });
+    </script>
 </body>
+
 </html>
