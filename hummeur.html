@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humeur - CycleHarmony</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5d0fe, #fecdd3);
+            min-height: 100vh;
+        }
+
+        .mood-item {
+            transition: all 0.3s ease;
+        }
+
+        .mood-item:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center p-4">
+    <div class="container max-w-4xl bg-white bg-opacity-90 rounded-3xl shadow-xl p-8 z-10">
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-6">Suivi de l'Humeur</h1>
+
+        <p class="text-lg text-center text-gray-700 mb-8">Enregistrez votre humeur quotidienne pour mieux comprendre vos cycles émotionnels</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="mood-item bg-yellow-100 p-6 rounded-xl text-center">
+                <i class="fas fa-grin-beam text-6xl text-yellow-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-yellow-700 mb-2">Heureux</h2>
+                <input type="radio" name="mood" value="happy" class="form-radio h-5 w-5 text-yellow-600">
+            </div>
+
+            <div class="mood-item bg-blue-100 p-6 rounded-xl text-center">
+                <i class="fas fa-meh text-6xl text-blue-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-blue-700 mb-2">Neutre</h2>
+                <input type="radio" name="mood" value="neutral" class="form-radio h-5 w-5 text-blue-600">
+            </div>
+
+            <div class="mood-item bg-red-100 p-6 rounded-xl text-center">
+                <i class="fas fa-angry text-6xl text-red-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-red-700 mb-2">Irrité</h2>
+                <input type="radio" name="mood" value="irritated" class="form-radio h-5 w-5 text-red-600">
+            </div>
+
+            <div class="mood-item bg-green-100 p-6 rounded-xl text-center">
+                <i class="fas fa-laugh text-6xl text-green-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-green-700 mb-2">Énergique</h2>
+                <input type="radio" name="mood" value="energetic" class="form-radio h-5 w-5 text-green-600">
+            </div>
+
+            <div class="mood-item bg-purple-100 p-6 rounded-xl text-center">
+                <i class="fas fa-sad-tear text-6xl text-purple-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-purple-700 mb-2">Triste</h2>
+                <input type="radio" name="mood" value="sad" class="form-radio h-5 w-5 text-purple-600">
+            </div>
+
+            <div class="mood-item bg-gray-100 p-6 rounded-xl text-center">
+                <i class="fas fa-tired text-6xl text-gray-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">Fatigué</h2>
+                <input type="radio" name="mood" value="tired" class="form-radio h-5 w-5 text-gray-600">
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">Notes sur l'humeur</h3>
+            <textarea class="w-full p-2 rounded-md border border-gray-300" rows="4" placeholder="Ajoutez des détails sur votre humeur ici..."></textarea>
+        </div>
+
+        <div class="mt-8 text-center">
+            <button id="saveMood" class="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 ease-in-out transform hover:scale-105">
+                Enregistrer l'humeur
+            </button>
+        </div>
+    </div>
+
+    <script>
+        gsap.from(".container", { duration: 1, opacity: 0, y: 50, ease: "power3.out" });
+        gsap.from("h1", { duration: 1, opacity: 0, y: 20, delay: 0.5, ease: "power3.out" });
+        gsap.from("p", { duration: 1, opacity: 0, y: 20, delay: 0.7, ease: "power3.out" });
+        gsap.from(".mood-item", { duration: 1, opacity: 0, y: 20, stagger: 0.2, delay: 0.9, ease: "power3.out" });
+        gsap.from("#saveMood", { duration: 1, opacity: 0, y: 20, delay: 1.7, ease: "power3.out" });
+
+        document.getElementById('saveMood').addEventListener('click', () => {
+            // Ajoutez ici la logique pour sauvegarder l'humeur
+            alert('Humeur enregistrée !');
+        });
+
+        // Animation au survol des éléments d'humeur
+        document.querySelectorAll('.mood-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                gsap.to(item, { duration: 0.3, y: -5, scale: 1.05, ease: "power2.out" });
+            });
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, { duration: 0.3, y: 0, scale: 1, ease: "power2.out" });
+            });
+        });
+    </script>
+</body>
+
+</html>
