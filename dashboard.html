@@ -7,6 +7,7 @@
     <title>Dashboard CycleHarmony</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -24,6 +25,15 @@
         .dashboard-card:hover {
             transform: translateY(-5px);
         }
+
+        .cycle-phase {
+            transition: all 0.3s ease;
+        }
+
+        .cycle-phase.active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -34,13 +44,14 @@
                 <div class="flex space-x-7">
                     <div>
                         <a href="#" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-500 text-lg">CycleHarmony</span>
+                            <span class="font-semibold text-purple-600 text-lg">Seintou</span>
                         </a>
                     </div>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <a href="#" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-purple-500 hover:text-white transition duration-300">Mon Profil</a>
-                    <a href="#" class="py-2 px-2 font-medium text-white bg-purple-500 rounded hover:bg-purple-400 transition duration-300">Déconnexion</a>
+                    <a href="monprofile.html" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-purple-500 hover:text-white transition duration-300">Mon Profil</a>
+                    <a href="appli.html" class="py-2 px-2 font-medium text-white bg-purple-500 rounded hover:bg-purple-400 transition duration-300">Explorez</a>
+                    <a href="index.html" class="py-2 px-2 font-medium text-white bg-red-500 rounded hover:bg-red-400 transition duration-300">Déconnexion</a>
                 </div>
             </div>
         </div>
@@ -52,55 +63,64 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
                 <h2 class="text-xl font-semibold text-purple-600 mb-4">État du cycle</h2>
-                <p class="text-gray-600">Jour 14 de votre cycle</p>
-                <p class="text-sm text-gray-500 mt-2">Prochaines règles dans 14 jours</p>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-gray-600">Jour 14 de votre cycle</p>
+                        <p class="text-sm text-gray-500 mt-2">Prochaines règles dans 14 jours</p>
+                    </div>
+                    <div class="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center">
+                        <span class="text-2xl font-bold text-purple-600">14</span>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between">
+                    <div class="cycle-phase cursor-pointer text-center p-2 rounded-lg bg-pink-100 text-pink-600 flex-1 mr-2">
+                        Menstruation
+                    </div>
+                    <div class="cycle-phase cursor-pointer text-center p-2 rounded-lg bg-yellow-100 text-yellow-600 flex-1 mr-2">
+                        Folliculaire
+                    </div>
+                    <div class="cycle-phase cursor-pointer text-center p-2 rounded-lg bg-green-100 text-green-600 flex-1 mr-2">
+                        Ovulation
+                    </div>
+                    <div class="cycle-phase cursor-pointer text-center p-2 rounded-lg bg-blue-100 text-blue-600 flex-1">
+                        Lutéale
+                    </div>
+                </div>
             </div>
 
             <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
                 <h2 class="text-xl font-semibold text-purple-600 mb-4">Humeur</h2>
-                <div class="flex justify-around">
-                    <button class="text-3xl hover:scale-110 transition-transform">😊</button>
-                    <button class="text-3xl hover:scale-110 transition-transform">😐</button>
-                    <button class="text-3xl hover:scale-110 transition-transform">😢</button>
-                    <button class="text-3xl hover:scale-110 transition-transform">😡</button>
+                <div class="flex justify-around mb-4">
+                    <button class="mood-btn text-3xl hover:scale-110 transition-transform" data-mood="happy">😊</button>
+                    <button class="mood-btn text-3xl hover:scale-110 transition-transform" data-mood="neutral">😐</button>
+                    <button class="mood-btn text-3xl hover:scale-110 transition-transform" data-mood="sad">😢</button>
+                    <button class="mood-btn text-3xl hover:scale-110 transition-transform" data-mood="angry">😡</button>
                 </div>
+                <div id="moodChart" class="w-full h-40"></div>
             </div>
 
             <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
                 <h2 class="text-xl font-semibold text-purple-600 mb-4">Symptômes</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">Crampes</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Fatigue</span>
-                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">+ Ajouter</span>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm cursor-pointer hover:bg-pink-200 transition-colors">Crampes</span>
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm cursor-pointer hover:bg-blue-200 transition-colors">Fatigue</span>
+                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm cursor-pointer hover:bg-purple-200 transition-colors">Maux de tête</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm cursor-pointer hover:bg-green-200 transition-colors">+ Ajouter</span>
                 </div>
+                <div id="symptomChart" class="w-full h-40"></div>
             </div>
 
             <div class="dashboard-card bg-white p-6 rounded-xl shadow-md col-span-1 md:col-span-2 lg:col-span-3">
                 <h2 class="text-xl font-semibold text-purple-600 mb-4">Calendrier</h2>
-                <div class="grid grid-cols-7 gap-2 text-center">
-                    <div class="font-bold">Lun</div>
-                    <div class="font-bold">Mar</div>
-                    <div class="font-bold">Mer</div>
-                    <div class="font-bold">Jeu</div>
-                    <div class="font-bold">Ven</div>
-                    <div class="font-bold">Sam</div>
-                    <div class="font-bold">Dim</div>
-                    <!-- Exemple de jours, à remplacer par une génération dynamique -->
-                    <div class="py-2 bg-gray-100 rounded">1</div>
-                    <div class="py-2 bg-gray-100 rounded">2</div>
-                    <div class="py-2 bg-pink-200 rounded">3</div>
-                    <div class="py-2 bg-pink-200 rounded">4</div>
-                    <div class="py-2 bg-gray-100 rounded">5</div>
-                    <div class="py-2 bg-gray-100 rounded">6</div>
-                    <div class="py-2 bg-gray-100 rounded">7</div>
-                    <!-- ... autres jours ... -->
+                <div id="calendar" class="grid grid-cols-7 gap-2 text-center">
+                    <!-- Le calendrier sera généré dynamiquement par JavaScript -->
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="bg-white text-center p-4 mt-8">
-        <p class="text-gray-600">© 2024 CycleHarmony. Tous droits réservés.</p>
+        <p class="text-gray-600">© 2024 Seintou. Tous droits réservés.</p>
     </footer>
 
     <script>
@@ -113,16 +133,128 @@
             ease: "power3.out"
         });
 
-        // Exemple de fonction pour enregistrer l'humeur
+        // Fonction pour enregistrer l'humeur
         function recordMood(mood) {
             console.log("Humeur enregistrée :", mood);
             // Ici, vous pouvez ajouter la logique pour envoyer ces données à votre backend
+            updateMoodChart(mood);
         }
 
         // Ajouter des écouteurs d'événements aux boutons d'humeur
-        document.querySelectorAll('.dashboard-card:nth-child(2) button').forEach(button => {
-            button.addEventListener('click', () => recordMood(button.textContent));
+        document.querySelectorAll('.mood-btn').forEach(button => {
+            button.addEventListener('click', () => recordMood(button.dataset.mood));
         });
+
+        // Fonction pour mettre à jour le graphique d'humeur
+        function updateMoodChart(newMood) {
+            // Simuler des données d'humeur
+            const moodData = {
+                labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                datasets: [{
+                    label: 'Humeur',
+                    data: [3, 1, 2, 4, 2, 3, getMoodValue(newMood)],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            };
+
+            new Chart(document.getElementById('moodChart'), {
+                type: 'line',
+                data: moodData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 4
+                        }
+                    }
+                }
+            });
+        }
+
+        function getMoodValue(mood) {
+            const moodValues = { happy: 4, neutral: 3, sad: 2, angry: 1 };
+            return moodValues[mood] || 3;
+        }
+
+        // Initialiser le graphique d'humeur
+        updateMoodChart('neutral');
+
+        // Fonction pour mettre à jour le graphique des symptômes
+        function updateSymptomChart() {
+            const symptomData = {
+                labels: ['Crampes', 'Fatigue', 'Maux de tête', 'Ballonnements'],
+                datasets: [{
+                    label: 'Intensité des symptômes',
+                    data: [3, 2, 1, 2],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            new Chart(document.getElementById('symptomChart'), {
+                type: 'bar',
+                data: symptomData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialiser le graphique des symptômes
+        updateSymptomChart();
+
+        // Fonction pour générer le calendrier
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+            
+            // Ajouter les en-têtes des jours de la semaine
+            daysOfWeek.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.textContent = day;
+                dayElement.classList.add('font-bold');
+                calendar.appendChild(dayElement);
+            });
+
+            // Générer les jours du mois (exemple pour 30 jours)
+            for (let i = 1; i <= 30; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.textContent = i;
+                dayElement.classList.add('py-2', 'rounded', 'cursor-pointer', 'hover:bg-purple-100', 'transition-colors');
+                
+                // Exemple : marquer les jours de règles
+                if (i >= 1 && i <= 5) {
+                    dayElement.classList.add('bg-pink-200');
+                } else {
+                    dayElement.classList.add('bg-gray-100');
+                }
+
+                calendar.appendChild(dayElement);
+            }
+        }
+
+        // Générer le calendrier au chargement de la page
+        generateCalendar();
     </script>
 </body>
 

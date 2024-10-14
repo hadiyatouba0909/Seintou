@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conseils de Santé - CycleHarmony</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5d0fe, #fecdd3);
+            min-height: 100vh;
+        }
+
+        .advice-item {
+            transition: all 0.3s ease;
+        }
+
+        .advice-item:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center p-4">
+    <div class="container max-w-4xl bg-white bg-opacity-90 rounded-3xl shadow-xl p-8 z-10">
+        <h1 class="text-4xl font-bold text-center text-green-600 mb-6">Conseils de Santé</h1>
+
+        <p class="text-lg text-center text-gray-700 mb-8">Des informations utiles pour prendre soin de vous tout au long de votre cycle</p>
+
+        <div id="adviceList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="advice-item bg-pink-100 p-6 rounded-xl">
+                <i class="fas fa-tint text-4xl text-pink-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-pink-700 mb-2">Pendant les règles</h2>
+                <ul class="text-gray-600 list-disc list-inside">
+                    <li>Hydratez-vous bien pour réduire les crampes</li>
+                    <li>Privilégiez une alimentation riche en fer</li>
+                    <li>Pratiquez des exercices doux comme le yoga</li>
+                    <li>Utilisez une bouillotte pour soulager les douleurs</li>
+                </ul>
+            </div>
+
+            <div class="advice-item bg-purple-100 p-6 rounded-xl">
+                <i class="fas fa-cloud text-4xl text-purple-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-purple-700 mb-2">Pertes blanches</h2>
+                <ul class="text-gray-600 list-disc list-inside">
+                    <li>Les pertes blanches sont normales et saines</li>
+                    <li>Portez des sous-vêtements en coton</li>
+                    <li>Évitez les douches vaginales</li>
+                    <li>Consultez si odeur ou couleur inhabituelle</li>
+                </ul>
+            </div>
+
+            <div class="advice-item bg-blue-100 p-6 rounded-xl">
+                <i class="fas fa-wind text-4xl text-blue-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-blue-700 mb-2">Syndrome prémenstruel</h2>
+                <ul class="text-gray-600 list-disc list-inside">
+                    <li>Réduisez la consommation de sel et de caféine</li>
+                    <li>Dormez suffisamment (7-9 heures par nuit)</li>
+                    <li>Pratiquez une activité physique régulière</li>
+                    <li>Essayez des techniques de relaxation</li>
+                </ul>
+            </div>
+
+            <div class="advice-item bg-green-100 p-6 rounded-xl">
+                <i class="fas fa-heartbeat text-4xl text-green-500 mb-4"></i>
+                <h2 class="text-xl font-semibold text-green-700 mb-2">Santé générale</h2>
+                <ul class="text-gray-600 list-disc list-inside">
+                    <li>Faites un examen gynécologique annuel</li>
+                    <li>Pratiquez l'auto-examen des seins mensuellement</li>
+                    <li>Maintenez une alimentation équilibrée</li>
+                    <li>Gérez votre stress par la méditation ou le sport</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="appli.html" class="bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold py-3 px-8 rounded-full hover:from-green-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 ease-in-out transform hover:scale-105">
+                Retour à l'accueil
+            </a>
+        </div>
+    </div>
+
+    <script>
+        gsap.from(".container", { duration: 1, opacity: 0, y: 50, ease: "power3.out" });
+        gsap.from("h1", { duration: 1, opacity: 0, y: 20, delay: 0.5, ease: "power3.out" });
+        gsap.from("p", { duration: 1, opacity: 0, y: 20, delay: 0.7, ease: "power3.out" });
+        gsap.from(".advice-item", { duration: 1, opacity: 0, y: 20, stagger: 0.2, delay: 0.9, ease: "power3.out" });
+        gsap.from("a", { duration: 1, opacity: 0, y: 20, delay: 1.7, ease: "power3.out" });
+
+        // Animation au survol des éléments de conseil
+        document.querySelectorAll('.advice-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                gsap.to(item, { duration: 0.3, y: -5, scale: 1.05, ease: "power2.out" });
+            });
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, { duration: 0.3, y: 0, scale: 1, ease: "power2.out" });
+            });
+        });
+    </script>
+</body>
+
+</html>

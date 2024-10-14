@@ -35,28 +35,30 @@
             comprendre votre cycle</p>
 
         <div id="cycleTracking" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="tour-item bg-pink-100 p-6 rounded-xl">
+            <div class="tour-item bg-pink-100 p-6 rounded-xl" data-link="calendar.html">
                 <i class="fas fa-calendar-alt text-4xl text-pink-500 mb-4"></i>
                 <h2 class="text-xl font-semibold text-pink-700 mb-2">Suivi du Cycle</h2>
                 <p class="text-gray-600">Enregistrez vos règles et symptômes pour prédire vos prochains cycles.</p>
             </div>
 
-            <div id="analyse" class="tour-item bg-purple-100 p-6 rounded-xl">
+            <div class="tour-item bg-purple-100 p-6 rounded-xl" data-link="analyses-tendances.html">
                 <i class="fas fa-chart-line text-4xl text-purple-500 mb-4"></i>
                 <h2 class="text-xl font-semibold text-purple-700 mb-2">Analyses et Tendances</h2>
                 <p class="text-gray-600">Visualisez vos données pour mieux comprendre vos schémas menstruels.</p>
             </div>
 
-            <div id="rappels-personnalises" class="tour-item bg-blue-100 p-6 rounded-xl">
+            <div id="rappels-personnalises" class="tour-item bg-blue-100 p-6 rounded-xl"
+                data-link="rappels-personnalises.html">
                 <i class="fas fa-bell text-4xl text-blue-500 mb-4"></i>
                 <h2 class="text-xl font-semibold text-blue-700 mb-2">Rappels Personnalisés</h2>
                 <p class="text-gray-600">Recevez des notifications pour vos règles, ovulation et prise de pilule.</p>
             </div>
 
-            <div class="tour-item bg-green-100 p-6 rounded-xl">
+            <div class="tour-item bg-green-100 p-6 rounded-xl" data-link="conseils-sante.html">
                 <i class="fas fa-book-medical text-4xl text-green-500 mb-4"></i>
-                <h2 class="text-xl font-semibold text-green-700 mb-2">Journal de Santé</h2>
-                <p class="text-gray-600">Notez vos symptômes, humeur et activité physique quotidiennement.</p>
+                <h2 class="text-xl font-semibold text-green-700 mb-2">Conseil de santé</h2>
+                <p class="text-gray-600">Découvrez des conseils pratiques pour prendre soin de votre santé tout au long
+                    de votre cycle.</p>
             </div>
         </div>
 
@@ -89,20 +91,16 @@
             });
         });
 
-        document.getElementById('cycleTracking').addEventListener('click', () => {
-            // Remplacez l'URL ci-dessous par l'URL de votre page de calendrier
-            window.location.href = 'calendar.html';
+        document.getElementById('cycleTracking').addEventListener('click', (event) => {
+            const clickedItem = event.target.closest('.tour-item');
+            if (clickedItem) {
+                const link = clickedItem.getAttribute('data-link');
+                if (link) {
+                    window.location.href = link;
+                }
+            }
         });
 
-        document.getElementById('analyse').addEventListener('click', () => {
-            // Remplacez l'URL ci-dessous par l'URL de votre page de calendrier
-            window.location.href = 'analyses-tendances.html';
-        });
-
-        document.getElementById('rappels-personnalises').addEventListener('click', () => {
-            // Remplacez l'URL ci-dessous par l'URL de votre page de calendrier
-            window.location.href = 'analyses-tendances.html';
-        });
     </script>
 </body>
 

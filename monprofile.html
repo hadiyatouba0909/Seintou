@@ -1,12 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mon Profil - CycleHarmony</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5d0fe, #fecdd3);
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
-<body>
-    <h1>bonjour</h1>
-    <h1>bonjour</h1>
+
+<body class="flex flex-col min-h-screen">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="#" class="flex items-center py-4 px-2">
+                            <span class="font-semibold text-purple-600 text-lg">Seintou</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="py-2 px-2 font-medium text-purple-500 rounded hover:bg-purple-500 hover:text-white transition duration-300">Mon Profil</a>
+                    <a href="dashboard.html" class="py-2 px-2 font-medium text-white bg-purple-500 rounded hover:bg-purple-400 transition duration-300">Tableau de bord</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-purple-700 mb-6">Mon Profil</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="profile-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Informations personnelles</h2>
+                <form>
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+                        <input type="text" id="name" name="name" value="Sophie Dupont" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" value="sophie@example.com" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                    </div>
+                    <div class="mb-4">
+                        <label for="number" class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
+                        <input type="text" id="number" name="number" value="+221" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                    </div>
+                    <button type="submit" class="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition duration-300">Mettre à jour</button>
+                </form>
+            </div>
+
+            <div class="profile-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Paramètres du cycle</h2>
+                <form>
+                    <div class="mb-4">
+                        <label for="cycle-length" class="block text-sm font-medium text-gray-700">Longueur moyenne du cycle (jours)</label>
+                        <input type="number" id="cycle-length" name="cycle-length" value="28" min="21" max="35" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                    </div>
+                    <div class="mb-4">
+                        <label for="period-length" class="block text-sm font-medium text-gray-700">Durée moyenne des règles (jours)</label>
+                        <input type="number" id="period-length" name="period-length" value="5" min="2" max="7" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                    </div>
+                    <div class="mb-4">
+                        <label for="last-period" class="block text-sm font-medium text-gray-700">Date des dernières règles</label>
+                        <input type="date" id="last-period" name="last-period" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                    </div>
+                    <button type="submit" class="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition duration-300">Enregistrer</button>
+                </form>
+            </div>
+
+            <div class="profile-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Préférences de notifications</h2>
+                <form>
+                    <div class="mb-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox text-purple-500" checked>
+                            <span class="ml-2">Rappels de cycle</span>
+                        </label>
+                    </div>
+                    <div class="mb-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox text-purple-500" checked>
+                            <span class="ml-2">Conseils de santé</span>
+                        </label>
+                    </div>
+                    <div class="mb-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox text-purple-500">
+                            <span class="ml-2">Mises à jour de l'application</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition duration-300">Enregistrer les préférences</button>
+                </form>
+            </div>
+
+            <div class="profile-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Confidentialité et sécurité</h2>
+                <div class="mb-4">
+                    <button class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition duration-300 mb-2">Changer le mot de passe</button>
+                </div>
+                <div class="mb-4">
+                    <button class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition duration-300 mb-2">Gérer les appareils connectés</button>
+                </div>
+                <div>
+                    <button class="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-300">Supprimer le compte</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white text-center p-4 mt-8">
+        <p class="text-gray-600">© 2024 CycleHarmony. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Animation d'entrée pour les cartes du profil
+        gsap.from(".profile-card", {
+            duration: 0.8,
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+    </script>
 </body>
+
 </html>
